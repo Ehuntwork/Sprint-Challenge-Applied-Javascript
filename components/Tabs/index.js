@@ -20,8 +20,6 @@ let tabEntry = document.querySelector('.topics')
 
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
   .then(response => {
-        console.log(response.data.topics[1])
-        console.log(response.data.topics.length)
         for(let i = 0; i < response.data.topics.length; i++){
             let tabAdder = createTab(response.data.topics[i])
             tabEntry.appendChild(tabAdder)

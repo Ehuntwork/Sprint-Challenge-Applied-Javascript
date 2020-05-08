@@ -18,3 +18,56 @@
 // </div>
 //
 // Use your function to create a card for each of the articles and add the card to the DOM.
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(response=>{console.log(response.data.articles)})
+function cardMaker(dataInput){
+    let cardDiv = document.createElement('div')
+    let cardHeadlineDiv = document.createElement('div')
+    let cardAuthorDiv = document.createElement('div')
+    let cardImgDiv = document.createElement('div')
+    let cardImg = document.createElement('img')
+    let cardSpan = document.createElement('span')
+
+    cardDiv.classList.add('card')
+    cardHeadlineDiv.classList.add('headline')
+    cardAuthorDiv.classList.add('author')
+    cardImgDiv.classList.add('img-container')
+
+    cardDiv.appendChild(cardHeadlineDiv)
+    cardDiv.appendChild(cardAuthorDiv)
+    cardAuthorDiv.appendChild(cardImgDiv)
+    cardAuthorDiv.appendChild(cardSpan)
+    cardImgDiv.appendChild(cardImg)
+
+    cardHeadlineDiv.textContent = dataInput.headline;
+    cardImg.src = dataInput.authorPhoto;
+    cardSpan.textContent = dataInput.authorName;
+
+    return cardDiv;
+}
+
+let cardEntry = document.querySelector('.cards-container')
+
+function test(testarr){
+    axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(response => {
+        for(let x = 0; x < testarr.length; x++){
+            let cardAdder = cardMaker(response.data.articles[testarr][x]);
+            cardEntry.appendChild(cardAdder);}
+
+    })
+    .catch(err =>{
+        console.log('something went wrong', err)
+    })
+}
+
+
+axios.get('https://lambda-times-backend.herokuapp.com/topics')
+  .then(response => {
+        for(let i = 0; i < response.data.topics.length; i++){
+            test(response.data.topics[i]);
+        }
+  })
+  .catch(err =>{
+      console.log('something went wrong', err)
+  })
