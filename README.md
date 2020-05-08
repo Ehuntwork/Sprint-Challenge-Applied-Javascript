@@ -31,7 +31,7 @@ Edit this document to include your answers after each question. Make sure to lea
 1. What is the DOM?
 
 2. What is an event?
-
+an event is what when something is happening on your screen like a click 
 3. What is an event listener?
 
 4. Why would we convert a NodeList into an Array?
