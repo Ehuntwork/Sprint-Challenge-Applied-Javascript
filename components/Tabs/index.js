@@ -8,24 +8,25 @@
 //  Each tab should look like this:
 //    <div class="tab">topic here</div>
 
-
-function createTab(objNum){
+function createTab(tabContent){
     let newTab = document.createElement('div')
     newTab.classList.add('tab')
-    newTab.textContent = data.topics[i];
-  
+    newTab.textContent = tabContent;
+
+    return newTab;
 }
 
 let tabEntry = document.querySelector('.topics')
-for(let i = 0; i < data.topics.length; i++){
-    let tabAdder = createTab(i)
-    tabEntry.appendChild(tabAdder)
-}
 
-let test = axios.get('https://lambda-times-backend.herokuapp.com/topics')
- .then(response , () =>{
-     console.log(response.date.topics)
-
- })
-
-console.log(test)
+axios.get('https://lambda-times-backend.herokuapp.com/topics')
+  .then(response => {
+        console.log(response.data.topics[1])
+        console.log(response.data.topics.length)
+        for(let i = 0; i < response.data.topics.length; i++){
+            let tabAdder = createTab(response.data.topics[i])
+            tabEntry.appendChild(tabAdder)
+        }
+  })
+  .catch(err =>{
+      console.log('something went wrong', err)
+  })
