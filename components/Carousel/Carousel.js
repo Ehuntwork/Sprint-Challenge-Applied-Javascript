@@ -15,5 +15,5 @@
     <img src="./assets/carousel/trees.jpeg" />
     <img src="./assets/carousel/turntable.jpeg" />
     <div class="right-button"> > </div>
-  </div>
+  </div> 
 */
