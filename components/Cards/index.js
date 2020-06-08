@@ -52,7 +52,35 @@ function cardCreator(obj){
     ////element content/////////////////////////////////////////////
     cardHeadline.textContent = obj.headline;
     authorImg.src = obj.authorPhoto;
-    authorName.textContent = obj.authorName;
+    authorName.textContent = `By ${obj.authorName}`;
 
+
+    return newCard;
 
 }
+
+let cardContainer = document.querySelector('.cards-container');
+
+function getData(subject){
+    axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(res=>{
+        for(let i = 0; i< res.data.articles[subject].length; i++){
+            let cardData = cardCreator(res.data.articles[subject][i])
+            cardContainer.appendChild(cardData)
+        }
+    })
+    .catch(err =>{
+        console.log('Error', err)
+    })
+
+}
+  
+    axios.get('https://lambda-times-backend.herokuapp.com/topics')
+      .then(response => {
+            for(let i = 0; i < response.data.topics.length-1; i++){
+                getData(response.data.topics[i]);
+            }
+      })
+      .catch(err =>{
+          console.log('Error', err)
+      })
