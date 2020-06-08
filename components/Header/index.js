@@ -24,4 +24,22 @@ function Header() {
     headerDate.classList.add('date');
     headerTemp.classList.add('temp');
 
+    ////element content//////
+    headerDiv.appendChild(headerDate);
+    headerDiv.appendChild(headerH1);
+    headerDiv.appendChild(headerTemp);
+
+    headerDate.textContent = 'MARCH 28, 2019';
+
+    headerH1.textContent = 'Lambda Times';
+
+    headerTemp.textContent = '98°';
+
+
+
+    return headerDiv;
+    
 }
+
+let header = document.querySelector('.header-container');
+header.appendChild(Header())
